@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check All</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h2>Part 2: Check All</h2>
+    <!-- main checkbox to check and unchack all others -->
+    <input type="checkbox" id="checkAll"> <label for="checkAll">Check All</label><br>
+    <!-- individual checkboxes -->
+    <input type="checkbox" class="checkItem"> Item 1<br>
+    <input type="checkbox" class="checkItem"> Item 2<br>
+    <input type="checkbox" class="checkItem"> Item 3<br>
+    <input type="checkbox" class="checkItem"> Item 4<br>
+    
+    <script>
+        // "check all" checkbox 
+        document.getElementById("checkAll").addEventListener("change", function() {
+            let checkboxes = document.querySelectorAll(".checkItem"); // select all item checkboxes 
+            checkboxes.forEach(cb => cb.checked = this.checked); // set all checkboxes based on "check all"
+            this.nextSibling.textContent = this.checked ? "Uncheck All" : "Check All"; // updare label 
+        });
+
+        // individual checkboxes 
+        document.querySelectorAll(".checkItem").forEach(checkbox => {
+            checkbox.addEventListener("change", function() {
+                if (!this.checked) {
+                    document.getElementById("checkAll").checked = false; // uncheck "check all" if any item is unchecked 
+                    document.getElementById("checkAll").nextSibling.textContent = "Check All"; // update label 
+                }
+            });
+        });
+    </script>
+</body>
+</html>
